@@ -5,4 +5,4 @@ Ein kleinen CPP programm, welches Schwarm/Schwärme simuliert und dies graphisch
 
 
 ## TO-DO
-( ) Programm schreiben
+[ ] Programm schreiben
