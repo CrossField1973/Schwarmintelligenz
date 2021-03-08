@@ -9,7 +9,7 @@ Wenn sich einzelne Agenten vom Schwarm trennen, können diese von Agenten des an
 
 
 ## TO-DO
-[ ] Schwarm erstellen, der Distanz, Nähe und Richtung befolgt
-[ ] Schwarm umstellen, einen Anführer zu folgen
-[ ] Zweiter Schwarm implementieren
-[ ] Idee umsetzen
+- [ ] Schwarm erstellen, der Distanz, Nähe und Richtung befolgt
+- [ ] Schwarm umstellen, einen Anführer zu folgen
+- [ ] Zweiter Schwarm implementieren
+- [ ] Idee umsetzen
