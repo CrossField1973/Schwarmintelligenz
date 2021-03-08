@@ -33,3 +33,8 @@
 /.vs/Schwarmintelligenz/v16/Browse.VC.db-shm
 /.vs/Schwarmintelligenz/v16/Browse.VC.opendb
 /.vs/Schwarmintelligenz/v16/Browse.VC.db-wal
+
+# Debug
+Debug/
+x64/
+Release/
