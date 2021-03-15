@@ -1,14 +1,23 @@
 #include "window.h"
+#include <vector>
+#include "simulation.h"
+#include <random>
+
+
 
 int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCmdLine, int  nCmdShow)
 {
     //Time tick;
 
     Window window;
+    Simulation simulation;
+    
 
     if (SUCCEEDED(CoInitialize(NULL)))
     {
         window.Initialize(hInstance);
+        
+        
 
         MSG msg = { 0 };
         while (WM_QUIT != msg.message)
@@ -21,7 +30,8 @@ int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCm
             else
             {
                 //update tick
-                window.OnRender();
+                //do logic
+                window.OnRender(simulation);
             }
         }
 

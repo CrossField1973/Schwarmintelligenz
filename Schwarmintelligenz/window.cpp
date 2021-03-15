@@ -79,7 +79,7 @@ void Window::DiscardDeviceResources() {
 }
 
 // Draw content.
-HRESULT Window::OnRender()
+HRESULT Window::OnRender(Simulation simulation)
 {
     HRESULT hr = S_OK;
 
@@ -98,19 +98,16 @@ HRESULT Window::OnRender()
         //Draw Background
         //Draw Agents (Differentiate )
 
-
-        int agentX;
-        int agentY;
-
-        D2D1_RECT_F rectangle2 = D2D1::RectF(
-            rtSize.width / 2 - 100.0f,
-            rtSize.height / 2 - 100.0f,
-            rtSize.width / 2 + 100.0f,
-            rtSize.height / 2 + 100.0f
-        );
-
-        //Draw a filled rectangle.
-        m_pRenderTarget->FillRectangle(&rectangle2, m_pLightSlateGrayBrush);
+        for (Agent agent : simulation.agents)
+        {
+            D2D1_RECT_F rectangle2 = D2D1::RectF(
+                agent.x - 50.0f,
+                agent.y - 50.0f,
+                agent.x + 50.0f,
+                agent.y + 50.0f
+            );
+            m_pRenderTarget->FillRectangle(&rectangle2, m_pLightSlateGrayBrush);
+        }
 
         //// Draw a grid background.
         //int width = static_cast<int>(rtSize.width);

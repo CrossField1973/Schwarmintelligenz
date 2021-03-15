@@ -3,6 +3,8 @@
 #include <windows.h>
 #include <d2d1.h>
 #include <d2d1helper.h>
+#include "simulation.h"
+
 
 #pragma comment(lib, "d2d1.lib")
 
@@ -14,6 +16,6 @@ public:
 	void Initialize(HINSTANCE hInstance);
 	HRESULT CreateDeviceResources();
 	void DiscardDeviceResources();
-	HRESULT OnRender();
+	HRESULT OnRender(Simulation simulation);
 	HRESULT CreateDeviceIndependentResources();
 };
