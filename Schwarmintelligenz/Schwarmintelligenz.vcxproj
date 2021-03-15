@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="logic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="simulation.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>

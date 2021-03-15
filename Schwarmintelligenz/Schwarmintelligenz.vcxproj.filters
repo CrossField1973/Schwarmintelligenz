@@ -24,6 +24,9 @@
     <ClCompile Include="logic.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="simulation.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">

@@ -1,7 +1,9 @@
 #pragma once
 
-class Agent {
+class Agent 
+{
 public:
 	int x;
 	int y;
+	int affiliation;
 };

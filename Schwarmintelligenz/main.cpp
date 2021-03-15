@@ -16,7 +16,7 @@ int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCm
     if (SUCCEEDED(CoInitialize(NULL)))
     {
         window.Initialize(hInstance);
-        
+        simulation.Initialize(50);
         
 
         MSG msg = { 0 };
@@ -30,7 +30,7 @@ int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCm
             else
             {
                 //update tick
-                //do logic
+                simulation.update();
                 window.OnRender(simulation);
             }
         }
