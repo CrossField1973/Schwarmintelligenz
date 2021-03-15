@@ -2,22 +2,18 @@
 #include <vector>
 #include "simulation.h"
 #include <random>
+#include "graphics.h"
 
 
 
 int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCmdLine, int  nCmdShow)
 {
     //Time tick;
-
-    Window window;
-    Simulation simulation;
-    
-
     if (SUCCEEDED(CoInitialize(NULL)))
     {
-        window.Initialize(hInstance);
-        simulation.Initialize(50);
-        
+        Window window(hInstance);
+        Simulation simulation(50);
+        Graphics graphics;
 
         MSG msg = { 0 };
         while (WM_QUIT != msg.message)
@@ -31,7 +27,7 @@ int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCm
             {
                 //update tick
                 simulation.update();
-                window.OnRender(simulation);
+                graphics.render(simulation, window.m_hwnd);
             }
         }
 

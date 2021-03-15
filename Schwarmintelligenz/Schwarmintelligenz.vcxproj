@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="agent.cpp" />
+    <ClCompile Include="graphics.cpp" />
     <ClCompile Include="logic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="simulation.cpp" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="agent.h" />
+    <ClInclude Include="graphics.h" />
     <ClInclude Include="logic.h" />
     <ClInclude Include="simulation.h" />
     <ClInclude Include="window.h" />

@@ -60,6 +60,11 @@ public:
 		posY = a;
 	}
 
+	void setAffiliation(int a)
+	{
+		affiliation = a;
+	}
+
 	int getWidth()
 	{
 		return width;
@@ -90,6 +95,11 @@ public:
 		return max_force;
 	}
 
+	int getAffiliation()
+	{
+		return affiliation;
+	}
+
 
 
 
@@ -110,6 +120,7 @@ private:
 	int perception = 100;
 	int width;
 	int height;
+	int affiliation;
 
 	/**********************************/
 	/*		 private methods		 */

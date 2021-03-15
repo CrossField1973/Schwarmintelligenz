@@ -8,8 +8,8 @@ class Simulation
 public:
 	Logic logic;
 	std::vector<Agent> agents = {};
-	int worldWith;
-	int worldHeight;
-	void Initialize(int numAgents);
+	int worldWith = 700;
+	int worldHeight = 500;
+	Simulation(int numAgents);
 	void update();
 };

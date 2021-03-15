@@ -1,8 +1,5 @@
-﻿  agent.cpp
-  main.cpp
-  Generating Code...
-  Schwarmintelligenz.vcxproj -> C:\Users\User\Source\Repos\Schwarmintelligenz\x64\Debug\Schwarmintelligenz.exe
-﻿  main.cpp
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: Das Zwischenverzeichnis (x64\Debug\) enthält freigegebene Dateien aus einem anderen Projekt (Schwarmintelligenz.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
+  simulation.cpp
   window.cpp
   Code wird generiert...
   Schwarmintelligenz.vcxproj -> C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\x64\Debug\Schwarmintelligenz.exe
