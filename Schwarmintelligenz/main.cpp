@@ -2,6 +2,8 @@
 
 int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCmdLine, int  nCmdShow)
 {
+    //Time tick;
+
     Window window;
 
     if (SUCCEEDED(CoInitialize(NULL)))
@@ -18,6 +20,7 @@ int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCm
             }
             else
             {
+                //update tick
                 window.OnRender();
             }
         }
