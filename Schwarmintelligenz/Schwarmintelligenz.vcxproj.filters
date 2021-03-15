@@ -36,9 +36,6 @@
     <ClInclude Include="window.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="agent.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="simulation.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
