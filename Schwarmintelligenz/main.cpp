@@ -1,39 +1,44 @@
-#include "agent.h"
-#include <iostream>
+#include "window.h"
+#include <vector>
+#include "simulation.h"
 #include <random>
 
 
 
-
-int main()
+int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCmdLine, int  nCmdShow)
 {
-	int width = 1000;
-	int height = 1000;
-	vector<Agent> agents;
+    //Time tick;
 
-	std::random_device random_device;
-	std::mt19937 random_engine(random_device());
-	std::uniform_real_distribution<double> distribution_0_1000(0 ,1000);
+    Window window;
+    Simulation simulation;
+    
 
-	
-	for (int i = 0; i < 50; i++)
-	{
-	
-		Agent agent = Agent(distribution_0_1000(random_engine), distribution_0_1000(random_engine), 1000, 1000);
-		agents.push_back(agent);
-	}
+    if (SUCCEEDED(CoInitialize(NULL)))
+    {
+        window.Initialize(hInstance);
+        simulation.Initialize(50);
+        
 
-	for(;;)
-	{
-		for (int l = 0; l < agents.size(); l++)
-		{
-			agents[l].edges();
-			agents[l].apply_behaivor(agents);
-			agents[l].update();
-			agents[l].show(l);
-		}
-	}
+        MSG msg = { 0 };
+        while (WM_QUIT != msg.message)
+        {
+            if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+            else
+            {
+                //update tick
+                simulation.update();
+                window.OnRender(simulation);
+            }
+        }
 
-	
-	return 0;
+        CoUninitialize();
+    }
+
+
+
+    return 0;
 }
