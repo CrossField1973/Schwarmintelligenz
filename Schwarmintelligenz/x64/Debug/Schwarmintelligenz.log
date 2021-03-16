@@ -1,8 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: Das Zwischenverzeichnis (x64\Debug\) enthält freigegebene Dateien aus einem anderen Projekt (Schwarmintelligenz.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
-  main.cpp
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\main.cpp(28,28): error C2039: "ti" ist kein Member von "Simulation".
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\simulation.h(7): message : Siehe Deklaration von "Simulation"
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\main.cpp(29,17): error C2146: Syntaxfehler: Fehlendes ";" vor Bezeichner "simulation"
-  simulation.cpp
-  window.cpp
-  Code wird generiert...
