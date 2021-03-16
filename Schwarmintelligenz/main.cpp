@@ -25,8 +25,7 @@ int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCm
             }
             else
             {
-                //update tick
-                simulation.update();
+                simulation.timer.tick();              
                 graphics.render(simulation, window.m_hwnd);
             }
         }
