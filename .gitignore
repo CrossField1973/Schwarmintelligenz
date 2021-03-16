@@ -1,40 +1,9 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-/.vs/Schwarmintelligenz/v16/Browse.VC.db-shm
-/.vs/Schwarmintelligenz/v16/Browse.VC.opendb
-/.vs/Schwarmintelligenz/v16/Browse.VC.db-wal
-
-# Debug
-Debug/
-x64/
-Release/
+*
+!*.sln
+!*.md
+!*.cpp
+!*.h
+!*.proj
+!*.filters
+!*.user
+!*.gitignore
