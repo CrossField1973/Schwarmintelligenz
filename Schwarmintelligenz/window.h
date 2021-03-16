@@ -11,11 +11,6 @@
 class Window
 {
 public:
-	Window();
-	~Window();
-	void Initialize(HINSTANCE hInstance);
-	HRESULT CreateDeviceResources();
-	void DiscardDeviceResources();
-	HRESULT OnRender(Simulation simulation);
-	HRESULT CreateDeviceIndependentResources();
+	Window(HINSTANCE hInstance);
+	HWND m_hwnd;
 };
