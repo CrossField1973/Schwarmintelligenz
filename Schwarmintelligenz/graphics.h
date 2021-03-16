@@ -13,10 +13,13 @@ private:
 	ID2D1HwndRenderTarget* m_pRenderTarget;
 	ID2D1SolidColorBrush* m_pLightSlateGrayBrush;
 	ID2D1SolidColorBrush* m_pCornflowerBlueBrush;
+	ID2D1SolidColorBrush* m_pGrayBrush;
 
 	HRESULT CreateDeviceIndependentResources();
 	HRESULT CreateDeviceResources(HWND hwnd);
 	void DiscardDeviceResources();
+	void DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor);
+	void DrawAgent(int x, int y, float size, ID2D1SolidColorBrush* color);
 
 public:
 	Graphics();

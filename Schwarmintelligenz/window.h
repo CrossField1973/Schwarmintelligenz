@@ -13,5 +13,4 @@ class Window
 public:
 	Window(HINSTANCE hInstance);
 	HWND m_hwnd;
-	HINSTANCE m_hInstance;
 };

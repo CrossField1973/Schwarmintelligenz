@@ -54,16 +54,57 @@ HRESULT Graphics::CreateDeviceResources(HWND hwnd)
                 &m_pCornflowerBlueBrush
             );
         }
+        if (SUCCEEDED(hr))
+        {
+            // Create a blue brush.
+            hr = m_pRenderTarget->CreateSolidColorBrush(
+                D2D1::ColorF(D2D1::ColorF::Gray),
+                &m_pGrayBrush
+            );
+        }
     }
 
     return hr;
 }
 
 // Release device-dependent resource.
-void Graphics::DiscardDeviceResources() {
+void Graphics::DiscardDeviceResources() 
+{
     SafeRelease(&m_pRenderTarget);
     SafeRelease(&m_pLightSlateGrayBrush);
     SafeRelease(&m_pCornflowerBlueBrush);
+}
+
+void Graphics::DrawAgent(int posX, int posY, float size, ID2D1SolidColorBrush* color)
+{
+    D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(posX, posY), size / 2.0f, size / 2.0f);
+    m_pRenderTarget->FillEllipse(&ellipse, color);
+}
+
+void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor)
+{
+    HRESULT hr = S_OK;
+    ID2D1SolidColorBrush* pBaseColor;
+    ID2D1SolidColorBrush* pShadowColor;
+
+    hr = m_pRenderTarget->CreateSolidColorBrush(
+        baseColor,
+        &pBaseColor
+    );
+
+    hr = m_pRenderTarget->CreateSolidColorBrush(
+        D2D1::ColorF(baseColor.r - 20.0f / 255.0f, baseColor.g - 20.0f / 255.0f, baseColor.b - 20.0f / 255.0f),
+        &pShadowColor
+    );
+
+    for (Agent agent : agents)
+    {
+        //Draw Agent Shadow
+        DrawAgent(agent.getPosX() + 5.0f, agent.getPosY() + 5.0f, 50.0f, pShadowColor);
+
+        //Draw Agent
+        DrawAgent(agent.getPosX(), agent.getPosY(), 50.0f, pBaseColor);
+    }
 }
 
 // Draw content.
@@ -76,73 +117,13 @@ HRESULT Graphics::render(Simulation simulation, HWND hwnd)
     if (SUCCEEDED(hr))
     {
         m_pRenderTarget->BeginDraw();
-
         m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-
         m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
-
         D2D1_SIZE_F rtSize = m_pRenderTarget->GetSize();
 
         //Draw Background
-        //Draw Agents (Differentiate )
 
-        for (Agent agent : simulation.agents)
-        {
-            D2D1_RECT_F rectangle2 = D2D1::RectF(
-                agent.getPosX() - 50.0f,
-                agent.getPosY() - 50.0f,
-                agent.getPosX() + 50.0f,
-                agent.getPosY() + 50.0f
-            );
-            m_pRenderTarget->FillRectangle(&rectangle2, m_pLightSlateGrayBrush);
-        }
-
-        //// Draw a grid background.
-        //int width = static_cast<int>(rtSize.width);
-        //int height = static_cast<int>(rtSize.height);
-
-        ////Draw UI
-
-        //for (int x = 0; x < width; x += 10)
-        //{
-        //    m_pRenderTarget->DrawLine(
-        //        D2D1::Point2F(static_cast<FLOAT>(x), 0.0f),
-        //        D2D1::Point2F(static_cast<FLOAT>(x), rtSize.height),
-        //        m_pLightSlateGrayBrush,
-        //        0.5f
-        //    );
-        //}
-
-        //for (int y = 0; y < height; y += 10)
-        //{
-        //    m_pRenderTarget->DrawLine(
-        //        D2D1::Point2F(0.0f, static_cast<FLOAT>(y)),
-        //        D2D1::Point2F(rtSize.width, static_cast<FLOAT>(y)),
-        //        m_pLightSlateGrayBrush,
-        //        0.5f
-        //    );
-        //}
-
-        //// Draw two rectangles.
-        //D2D1_RECT_F rectangle1 = D2D1::RectF(
-        //    rtSize.width / 2 - 50.0f,
-        //    rtSize.height / 2 - 50.0f,
-        //    rtSize.width / 2 + 50.0f,
-        //    rtSize.height / 2 + 50.0f
-        //);
-
-        //D2D1_RECT_F rectangle2 = D2D1::RectF(
-        //    rtSize.width / 2 - 100.0f,
-        //    rtSize.height / 2 - 100.0f,
-        //    rtSize.width / 2 + 100.0f,
-        //    rtSize.height / 2 + 100.0f
-        //);
-
-        //// Draw a filled rectangle.
-        //m_pRenderTarget->FillRectangle(&rectangle1, m_pLightSlateGrayBrush);
-
-        //// Draw the outline of a rectangle.
-        //m_pRenderTarget->DrawRectangle(&rectangle2, m_pCornflowerBlueBrush);
+        DrawAgents(simulation.agents, D2D1::ColorF(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f));
 
         hr = m_pRenderTarget->EndDraw();
     }
@@ -161,7 +142,7 @@ HRESULT Graphics::CreateDeviceIndependentResources() {
     HRESULT hr = S_OK;
 
     // Create a Direct2D factory.
-    hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_pDirect2dFactory);
+    hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_MULTI_THREADED, &m_pDirect2dFactory);
 
     return hr;
 }

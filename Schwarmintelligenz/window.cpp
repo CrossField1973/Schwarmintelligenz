@@ -45,7 +45,7 @@ Window::Window(HINSTANCE hInstance)
     wcex.hInstance = hInstance;
     wcex.hbrBackground = NULL;
     wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = L"D2DDemoApp";
+    wcex.lpszClassName = L"SimulationWindow";
 
     RegisterClassEx(&wcex);
 
@@ -54,8 +54,8 @@ Window::Window(HINSTANCE hInstance)
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
     m_hwnd = CreateWindow(
-        L"D2DDemoApp",
-        L"Direct2D Demo App",
+        L"SimulationWindow",
+        L"Schwarm Simulation",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
