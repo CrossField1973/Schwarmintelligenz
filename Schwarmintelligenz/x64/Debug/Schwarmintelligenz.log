@@ -1,9 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: Das Zwischenverzeichnis (x64\Debug\) enthält freigegebene Dateien aus einem anderen Projekt (Schwarmintelligenz.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
-  graphics.cpp
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\graphics.cpp(80,62): warning C4244: "Argument": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\graphics.cpp(80,56): warning C4244: "Argument": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\graphics.cpp(103,59): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\graphics.cpp(103,35): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\graphics.cpp(106,49): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
-C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\Schwarmintelligenz\graphics.cpp(106,32): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
-  Schwarmintelligenz.vcxproj -> C:\Users\Kevin\source\repos\CrossField1973\Schwarmintelligenz\x64\Debug\Schwarmintelligenz.exe
