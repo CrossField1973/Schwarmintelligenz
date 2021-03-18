@@ -19,6 +19,12 @@
     <ClCompile Include="graphics.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="agent.h">
@@ -34,6 +40,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="simulation.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

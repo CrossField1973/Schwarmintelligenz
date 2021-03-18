@@ -3,8 +3,10 @@
 #include "simulation.h"
 #include <d2d1.h>
 #include <d2d1helper.h>
+#include <dwrite_2.h>
 
 #pragma comment(lib, "d2d1.lib")
+#pragma comment(lib, "dwrite.lib")
 
 class Graphics
 {
@@ -13,7 +15,10 @@ private:
 	ID2D1HwndRenderTarget* m_pRenderTarget;
 	ID2D1SolidColorBrush* m_pLightSlateGrayBrush;
 	ID2D1SolidColorBrush* m_pCornflowerBlueBrush;
-	ID2D1SolidColorBrush* m_pGrayBrush;
+	ID2D1SolidColorBrush* m_pBlackBrush;
+
+	IDWriteFactory2* m_pWriteFactory;
+	IDWriteTextFormat* m_pSergeoTextFormat;
 
 	HRESULT CreateDeviceIndependentResources();
 	HRESULT CreateDeviceResources(HWND hwnd);

@@ -2,6 +2,7 @@
 #include "graphics.h"
 #include <d2d1.h>
 #include <d2d1helper.h>
+#include <sstream>
 
 #pragma comment(lib, "d2d1.lib")
 
@@ -58,8 +59,8 @@ HRESULT Graphics::CreateDeviceResources(HWND hwnd)
         {
             // Create a blue brush.
             hr = m_pRenderTarget->CreateSolidColorBrush(
-                D2D1::ColorF(D2D1::ColorF::Gray),
-                &m_pGrayBrush
+                D2D1::ColorF(D2D1::ColorF::Black),
+                &m_pBlackBrush
             );
         }
     }
@@ -116,6 +117,7 @@ HRESULT Graphics::render(Simulation simulation, HWND hwnd)
 
     if (SUCCEEDED(hr))
     {
+        //Preparation
         m_pRenderTarget->BeginDraw();
         m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
         m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
@@ -125,6 +127,22 @@ HRESULT Graphics::render(Simulation simulation, HWND hwnd)
 
         DrawAgents(simulation.agents, D2D1::ColorF(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f));
 
+        //Draw Text
+        std::wostringstream outFPSString;
+        outFPSString.precision(6);
+        outFPSString << "FPS: " << simulation.fps << std::endl;
+        outFPSString << "Simulation Time: " << int(simulation.timer.getTotalTime()) << " Sekunden" << std::endl;
+        outFPSString << "Agent_" << simulation.selectedAgent << " posX: " << simulation.agents[simulation.selectedAgent].getPosX() << " posY: " << simulation.agents[simulation.selectedAgent].getPosY() << std::endl;
+        std::wstring outFPSText = outFPSString.str();
+
+        m_pRenderTarget->DrawTextW(
+            outFPSText.c_str(),
+            wcslen(outFPSText.c_str()),
+            m_pSergeoTextFormat, 
+            D2D1::RectF(0.0f, 0.0f, 800.0f, 600.0f), 
+            m_pBlackBrush);
+
+        //End Draw
         hr = m_pRenderTarget->EndDraw();
     }
 
@@ -143,6 +161,20 @@ HRESULT Graphics::CreateDeviceIndependentResources() {
 
     // Create a Direct2D factory.
     hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_MULTI_THREADED, &m_pDirect2dFactory);
+    
+    // Create a DWrite factory.
+    hr = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, _uuidof(IDWriteFactory2), reinterpret_cast<IUnknown**>(&m_pWriteFactory));
+
+    hr = m_pWriteFactory->CreateTextFormat(
+        L"Sergio UI",
+        nullptr,
+        DWRITE_FONT_WEIGHT_NORMAL,
+        DWRITE_FONT_STYLE_NORMAL,
+        DWRITE_FONT_STRETCH_NORMAL,
+        24.0f,
+        L"de-DE",
+        &m_pSergeoTextFormat
+    );
 
     return hr;
 }
@@ -156,7 +188,9 @@ Graphics::Graphics()
 Graphics::~Graphics()
 {
     SafeRelease(&m_pDirect2dFactory);
+    SafeRelease(&m_pWriteFactory);
     SafeRelease(&m_pRenderTarget);
     SafeRelease(&m_pLightSlateGrayBrush);
     SafeRelease(&m_pCornflowerBlueBrush);
+    SafeRelease(&m_pSergeoTextFormat);
 }
