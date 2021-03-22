@@ -10,12 +10,12 @@ Wenn sich einzelne Agenten vom Schwarm trennen, können diese von Agenten des an
 
 ## TO-DO
 ### UI (Kevin)
-- [ ] Windows & Direct2D
-- [ ] Funktionen zum zeichnen des Schwarmes
+- [x] Windows & Direct2D
+- [x] Funktionen zum zeichnen des Schwarmes
 - [ ] Code Cleanup
 
 ### Agenten (Nils)
-- [ ] Schwarm erstellen, der Distanz, Nähe und Richtung befolgt
+- [x] Schwarm erstellen, der Distanz, Nähe und Richtung befolgt
 - [ ] Schwarm umstellen, einen Anführer zu folgen
 - [ ] Zweiter Schwarm implementieren
 - [ ] Idee umsetzen
