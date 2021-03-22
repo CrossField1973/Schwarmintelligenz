@@ -33,8 +33,5 @@ int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdL
 
         CoUninitialize();
     }
-
-
-
     return 0;
 }
