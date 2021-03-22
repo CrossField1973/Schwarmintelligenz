@@ -6,6 +6,7 @@
 
 class Agent {
 public:
+    bool swarmB;
     Vector location;
     Vector velocity;
     Vector acceleration;
@@ -15,6 +16,7 @@ public:
     int w_height;
     Agent() {}
     Agent(float x, float y, int world_width, int world_height);
+    Agent(float x, float y, int world_width, int world_height, bool checkSwarmB);
     void applyForce(const Vector& force);
     Vector separation(const vector<Agent>& Agents);
     Vector align(const vector<Agent>& Agents);
