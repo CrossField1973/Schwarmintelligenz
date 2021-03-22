@@ -9,6 +9,7 @@
 
 Agent::Agent(float x, float y, int world_width, int world_height)
 {
+    swarmB = false;
     acceleration = Vector(0, 0);
     velocity = Vector(rand()%3 - 2, rand()%3 - 2);
     location = Vector(x, y);
@@ -50,12 +51,30 @@ Vector Agent::separation(const vector<Agent>& Agents)
     int count = 0;
     for (int i = 0; i < Agents.size(); i++) {
         float d = location.distance(Agents[i].location);
-        if ((d > 0) && (d < desiredseparation)) {
+        if ((d > 0) && (d < desiredseparation) && swarmB == false
+            && Agents[i].swarmB == false) {
             Vector diff(0,0);
             diff = diff.subTwoVector(location, Agents[i].location);
             diff.normalize();
             diff.divScalar(d);      
             steering.addVector(diff);
+            count++;
+        }
+
+        if ((d > 0) && (d < desiredseparation) && swarmB == true
+            && Agents[i].swarmB == true) {
+            Vector diff(0, 0);
+            diff = diff.subTwoVector(location, Agents[i].location);
+            diff.normalize();
+            diff.divScalar(d);
+            steering.addVector(diff);
+            count++;
+        }
+        else if ((d > 0) && (d < desiredseparation + 70) && swarmB == false && Agents[i].swarmB == true) {
+            Vector diffB(0, 0);
+            diffB = diffB.subTwoVector(location, Agents[i].location);
+            diffB.mulScalar(900);
+            steering.addVector(diffB);
             count++;
         }
     }
@@ -80,23 +99,6 @@ Vector Agent::align(const vector<Agent>& Agents)
         float d = location.distance(Agents[i].location);
         if ((d > 0) && (d < neighbordist)) { // 0 < d < 50
             sum.addVector(Agents[i].velocity);
-            count++;
-        }
-        
-        if ((d > 0) && (d < desiredseparation) && swarmB == true
-            && Agents[i].swarmB == true) {
-            Vector swarm2swarm(0, 0);
-            swarm2swarm = swarm2swarm.subTwoVector(location, Agents[i].location);
-            swarm2swarm.normalize();
-            swarm2swarm.divScalar(d);
-            steering.addVector(swarm2swarm);
-            count++;
-        }
-        else if ((d > 0) && (d < desiredseparation+70) && Agents[i].swarmB == true) {
-            Vector sumB(0, 0);
-            sumB = sumB.subTwoVector(location, Agents[i].location);
-            sumB.mulScalar(900);
-            steering.addVector(sumB);
             count++;
         }
     }

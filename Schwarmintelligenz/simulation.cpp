@@ -3,16 +3,21 @@
 
 Simulation::Simulation(int numAgents) : fps(0), mspf(0)
 {
-    //Initialize Agents
+	//Initialize Agents
 
 
-    for (int i = 0; i < numAgents; i++)
-    {
-        Agent agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 1200, 720);
-        //agent.setAffiliation(1);
-        agents.push_back(agent);
-    }
+	for (int i = 0; i < numAgents / 2; i++)
+	{
+		Agent agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 1200, 720, false);
+		//agent.setAffiliation(1);
+		agents.push_back(agent);
+	}
 
+	for (int i = 0; i < numAgents/2; i++)
+	{
+		Agent  agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 1200, 720, true);
+		agents.push_back(agent);
+	}
 	timer.reset();
 }
 
