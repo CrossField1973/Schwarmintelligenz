@@ -4,9 +4,6 @@
     <ClCompile Include="agent.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="logic.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -28,9 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="agent.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="logic.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="window.h">

@@ -8,7 +8,7 @@ Simulation::Simulation(int numAgents) : fps(0), mspf(0)
 
     for (int i = 0; i < numAgents; i++)
     {
-        Agent agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 800, 600);
+        Agent agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 1200, 720);
         //agent.setAffiliation(1);
         agents.push_back(agent);
     }

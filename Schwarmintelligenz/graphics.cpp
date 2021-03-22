@@ -3,6 +3,9 @@
 #include <d2d1.h>
 #include <d2d1helper.h>
 #include <sstream>
+#include <math.h>
+
+#define _USE_MATH_DEFINES
 
 #pragma comment(lib, "d2d1.lib")
 
@@ -76,13 +79,40 @@ void Graphics::DiscardDeviceResources()
     SafeRelease(&m_pCornflowerBlueBrush);
 }
 
-void Graphics::DrawAgent(int posX, int posY, float size, ID2D1SolidColorBrush* color, int agentNumber)
+double angleDegreeToDecimal(double angleDeg)
 {
-    D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(posX, posY), size / 2.0f, size / 2.0f);
-    m_pRenderTarget->FillEllipse(&ellipse, color);
+    return angleDeg * 3.14159265358979323846 / 180;
 }
 
-void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor, int agentNumber)
+void Graphics::DrawAgent(int posX, int posY, float angleDeg, float size, ID2D1SolidColorBrush* color)
+{
+    /*D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(posX, posY), size / 2.0f, size / 2.0f);
+    m_pRenderTarget->FillEllipse(&ellipse, color);*/
+
+
+    //TEST
+    D2D1_POINT_2F pt1 = { size * cos(angleDegreeToDecimal(angleDeg)) + posX, size * sin(angleDegreeToDecimal(angleDeg)) + posY };
+    D2D1_POINT_2F pt2 = { size * cos(angleDegreeToDecimal(angleDeg + 120)) + posX, size * sin(angleDegreeToDecimal(angleDeg + 120)) + posY };
+    D2D1_POINT_2F pt3 = { size * cos(angleDegreeToDecimal(angleDeg + 240)) + posX, size * sin(angleDegreeToDecimal(angleDeg + 240)) + posY };
+
+    ID2D1GeometrySink* pSink = NULL;
+    ID2D1PathGeometry* pPathGeometry = NULL;
+    m_pDirect2dFactory->CreatePathGeometry(&pPathGeometry);
+    pPathGeometry->Open(&pSink);
+
+    pSink->BeginFigure(pt1, D2D1_FIGURE_BEGIN_FILLED);
+    pSink->AddLine(pt2);
+    pSink->AddLine(pt3);
+    pSink->EndFigure(D2D1_FIGURE_END_CLOSED);
+    pSink->Close();
+
+    m_pRenderTarget->FillGeometry(pPathGeometry, color);
+    pSink->Release();
+    pPathGeometry->Release();
+    //TEST
+}
+
+void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor)
 {
     HRESULT hr = S_OK;
     ID2D1SolidColorBrush* pBaseColor;
@@ -98,17 +128,27 @@ void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor, int
         &pShadowColor
     );
 
+    int i = 0;
     for (Agent agent : agents)
     {
-       //Draw Agent Shadow
-        DrawAgent(agent.location.x + 5.0f, agent.location.y + 5.0f, 50.0f, pShadowColor, agentNumber);
+        //Draw Agent Shadow
+        DrawAgent(agent.location.x + 1.0f, agent.location.y + 1.0f, agent.angle(agent.velocity), 10.0f, pShadowColor);
 
         //Draw Agent
-        DrawAgent(agent.location.x, agent.location.y, 50.0f, pBaseColor, agentNumber);
+        DrawAgent(agent.location.x, agent.location.y, agent.angle(agent.velocity), 10.0f, pBaseColor);
 
-        //TEST
-        std::wostringstream agentNumber;
-        //TEST
+        std::wostringstream agentNumberString;
+        agentNumberString << i << std::endl;
+        std::wstring agentNumberText = agentNumberString.str();
+
+        m_pRenderTarget->DrawTextW(
+            agentNumberText.c_str(),
+            wcslen(agentNumberText.c_str()),
+            m_pSergeoTextFormat,
+            D2D1::RectF(agent.location.x, agent.location.y, 1200.0f, 720.0f),
+            m_pBlackBrush);
+
+        i++;
     }
 }
 
@@ -141,7 +181,7 @@ HRESULT Graphics::render(Simulation simulation, HWND hwnd)
 
         //Draw Background
 
-        DrawAgents(simulation.agents, D2D1::ColorF(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f), simulation.selectedAgent);
+        DrawAgents(simulation.agents, D2D1::ColorF(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f));
         
 
         //Draw Text
@@ -156,7 +196,7 @@ HRESULT Graphics::render(Simulation simulation, HWND hwnd)
             outFPSText.c_str(),
             wcslen(outFPSText.c_str()),
             m_pSergeoTextFormat, 
-            D2D1::RectF(0.0f, 0.0f, 800.0f, 600.0f), 
+            D2D1::RectF(0.0f, 0.0f, 1200.0f, 720.0f), 
             m_pBlackBrush);
 
         //End Draw
@@ -188,7 +228,7 @@ HRESULT Graphics::CreateDeviceIndependentResources() {
         DWRITE_FONT_WEIGHT_NORMAL,
         DWRITE_FONT_STYLE_NORMAL,
         DWRITE_FONT_STRETCH_NORMAL,
-        24.0f,
+        20.0f,
         L"de-DE",
         &m_pSergeoTextFormat
     );

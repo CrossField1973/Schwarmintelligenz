@@ -12,7 +12,7 @@ Agent::Agent(float x, float y, int world_width, int world_height)
     acceleration = Vector(0, 0);
     velocity = Vector(rand()%3 - 2, rand()%3 - 2);
     location = Vector(x, y);
-    maxSpeed = 3.5;
+    maxSpeed = 200;
     maxForce = 0.5;
     w_width = world_width;
     w_height = world_height;
@@ -26,7 +26,7 @@ void Agent::applyForce(const Vector& force)
 
 Vector Agent::separation(const vector<Agent>& Agents)
 {
-    float desiredseparation = 30;
+    float desiredseparation = 10;
     Vector steering(0, 0);
     int count = 0;
     for (int i = 0; i < Agents.size(); i++) {
@@ -114,8 +114,8 @@ void Agent::update(double dt)
 {
     acceleration.mulScalar(0.4);
     velocity.addVector(acceleration);
-    velocity.mulScalar(200 * dt);
-    velocity.limit(maxSpeed);
+    velocity.limit(maxSpeed * dt);
+    velocity.mulScalar(100 * dt);
     location.addVector(velocity);
     acceleration.mulScalar(0);
 }
@@ -150,6 +150,6 @@ void Agent::edges()
 
 float Agent::angle(const Vector& v)
 {
-    float angle = (float)(atan2(v.x, -v.y) * 180 / PI);
+    float angle = (float)(atan2(v.y, v.x) * 180 / PI);
     return angle;
 }

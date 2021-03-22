@@ -24,7 +24,7 @@ Window::Window(HINSTANCE hInstance)
     RegisterClassEx(&wcex);
 
     // Create the window. 
-    RECT rc = { 0, 0, 800, 600 };
+    RECT rc = { 0, 0, 1200, 720 };
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
     m_hwnd = CreateWindow(

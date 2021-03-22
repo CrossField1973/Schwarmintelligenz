@@ -4,7 +4,7 @@
 #include <random>
 #include "graphics.h"
 
-#define NUM_AGENTS 10
+#define NUM_AGENTS 50
 
 int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdLine, int  nCmdShow)
 {

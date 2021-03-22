@@ -23,8 +23,8 @@ private:
 	HRESULT CreateDeviceIndependentResources();
 	HRESULT CreateDeviceResources(HWND hwnd);
 	void DiscardDeviceResources();
-	void DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor, int agentNumber);
-	void DrawAgent(int x, int y, float size, ID2D1SolidColorBrush* color, int agentNumber);
+	void DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor);
+	void DrawAgent(int x, int y, float angleDeg, float size, ID2D1SolidColorBrush* color);
 
 public:
 	Graphics();
