@@ -4,15 +4,15 @@
 #include <random>
 #include "graphics.h"
 
+#define NUM_AGENTS 50
 
-
-int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCmdLine, int  nCmdShow)
+int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdLine, int  nCmdShow)
 {
-    //Time tick;
     if (SUCCEEDED(CoInitialize(NULL)))
     {
         Window window(hInstance);
-        Simulation simulation(50);
+        window.numAgents = NUM_AGENTS;
+        Simulation simulation(NUM_AGENTS);
         Graphics graphics;
 
         MSG msg = { 0 };
@@ -25,15 +25,13 @@ int WINAPI wWinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPWSTR  lpCm
             }
             else
             {
-                simulation.timer.tick();              
+                simulation.update();
+                simulation.selectedAgent = window.selectedAgent;
                 graphics.render(simulation, window.m_hwnd);
             }
         }
 
         CoUninitialize();
     }
-
-
-
     return 0;
 }

@@ -17,9 +17,9 @@ Simulation::Simulation(int numAgents) : fps(0), mspf(0)
 void Simulation::update()
 {
 	// update timer
-	simulation.calculateFrameStatistics();
-	simulation.update();
-	double deltaT = getDeltaTime();
+	timer.tick();
+	calculateFrameStatistics();
+	double deltaT = timer.getDeltaTime();
 }
 
 void Simulation::calculateFrameStatistics()
