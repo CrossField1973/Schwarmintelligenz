@@ -18,7 +18,7 @@ Agent::Agent(float x, float y, int world_width, int world_height)
     w_height = world_height;
 }
 
- Agent(float x, float y, int world_width, int world_height, bool checkSwarmB)
+ Agent::Agent(float x, float y, int world_width, int world_height, bool checkSwarmB)
  {
     swarmB = checkSwarmB;
     if (swarmB == true) {
