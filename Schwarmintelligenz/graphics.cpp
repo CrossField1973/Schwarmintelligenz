@@ -100,10 +100,10 @@ void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor)
     for (Agent agent : agents)
     {
         //Draw Agent Shadow
-        DrawAgent(agent.getPosX() + 5.0f, agent.getPosY() + 5.0f, 50.0f, pShadowColor);
+        DrawAgent(agent.location.x + 5.0f, agent.location.y + 5.0f, 50.0f, pShadowColor);
 
         //Draw Agent
-        DrawAgent(agent.getPosX(), agent.getPosY(), 50.0f, pBaseColor);
+        DrawAgent(agent.location.x, agent.location.y, 50.0f, pBaseColor);
     }
 }
 
