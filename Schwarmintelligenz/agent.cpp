@@ -18,6 +18,25 @@ Agent::Agent(float x, float y, int world_width, int world_height)
     w_height = world_height;
 }
 
+ Agent(float x, float y, int world_width, int world_height, bool checkSwarmB)
+ {
+    swarmB = checkSwarmB;
+    if (swarmB == true) {
+        maxSpeed = 400;
+        maxForce = 0.5;
+        velocity = Vector(rand()%3 - 1, rand()%3 - 1);
+    } else {
+        maxSpeed = 200;
+        maxForce = 0.5;
+        velocity = Vector(rand()%3 - 2, rand()%3 - 2);
+    }
+    acceleration = Vector(0, 0);
+    location = Vector(x, y);
+    w_width = world_width;
+    w_height = world_height;
+}
+
+
 
 void Agent::applyForce(const Vector& force)
 {
@@ -61,6 +80,23 @@ Vector Agent::align(const vector<Agent>& Agents)
         float d = location.distance(Agents[i].location);
         if ((d > 0) && (d < neighbordist)) { // 0 < d < 50
             sum.addVector(Agents[i].velocity);
+            count++;
+        }
+        
+        if ((d > 0) && (d < desiredseparation) && swarmB == true
+            && Agents[i].swarmB == true) {
+            Vector swarm2swarm(0, 0);
+            swarm2swarm = swarm2swarm.subTwoVector(location, Agents[i].location);
+            swarm2swarm.normalize();
+            swarm2swarm.divScalar(d);
+            steering.addVector(swarm2swarm);
+            count++;
+        }
+        else if ((d > 0) && (d < desiredseparation+70) && Agents[i].swarmB == true) {
+            Vector sumB(0, 0);
+            sumB = sumB.subTwoVector(location, Agents[i].location);
+            sumB.mulScalar(900);
+            steering.addVector(sumB);
             count++;
         }
     }
