@@ -76,13 +76,13 @@ void Graphics::DiscardDeviceResources()
     SafeRelease(&m_pCornflowerBlueBrush);
 }
 
-void Graphics::DrawAgent(int posX, int posY, float size, ID2D1SolidColorBrush* color)
+void Graphics::DrawAgent(int posX, int posY, float size, ID2D1SolidColorBrush* color, int agentNumber)
 {
     D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(posX, posY), size / 2.0f, size / 2.0f);
     m_pRenderTarget->FillEllipse(&ellipse, color);
 }
 
-void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor)
+void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor, int agentNumber)
 {
     HRESULT hr = S_OK;
     ID2D1SolidColorBrush* pBaseColor;
@@ -101,11 +101,27 @@ void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor)
     for (Agent agent : agents)
     {
        //Draw Agent Shadow
-        DrawAgent(agent.location.x + 5.0f, agent.location.y + 5.0f, 50.0f, pShadowColor);
+        DrawAgent(agent.location.x + 5.0f, agent.location.y + 5.0f, 50.0f, pShadowColor, agentNumber);
 
         //Draw Agent
-        DrawAgent(agent.location.x, agent.location.y, 50.0f, pBaseColor);y
+        DrawAgent(agent.location.x, agent.location.y, 50.0f, pBaseColor, agentNumber);
+
+        //TEST
+        std::wostringstream agentNumber;
+        //TEST
     }
+}
+
+int round(int n)
+{
+    // Smaller multiple
+    int a = (n / 10) * 10;
+
+    // Larger multiple
+    int b = a + 10;
+
+    // Return of closest of two
+    return (n - a > b - n) ? b : a;
 }
 
 // Draw content.
@@ -125,14 +141,15 @@ HRESULT Graphics::render(Simulation simulation, HWND hwnd)
 
         //Draw Background
 
-        DrawAgents(simulation.agents, D2D1::ColorF(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f));
+        DrawAgents(simulation.agents, D2D1::ColorF(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f), simulation.selectedAgent);
+        
 
         //Draw Text
         std::wostringstream outFPSString;
         outFPSString.precision(6);
         outFPSString << "FPS: " << simulation.fps << std::endl;
         outFPSString << "Simulation Time: " << int(simulation.timer.getTotalTime()) << " Sekunden" << std::endl;
-        outFPSString << "Agent_" << simulation.selectedAgent << " posX: " << simulation.agents[simulation.selectedAgent].getPosX() << " posY: " << simulation.agents[simulation.selectedAgent].getPosY() << std::endl;
+        outFPSString << "Agent_" << simulation.selectedAgent << " posX: " << round(int(simulation.agents[simulation.selectedAgent].location.x)) << " posY: " << round(int(simulation.agents[simulation.selectedAgent].location.y)) << std::endl;
         std::wstring outFPSText = outFPSString.str();
 
         m_pRenderTarget->DrawTextW(

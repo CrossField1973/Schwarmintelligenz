@@ -26,7 +26,7 @@ void Agent::applyForce(const Vector& force)
 
 Vector Agent::separation(const vector<Agent>& Agents)
 {
-    float desiredseparation = 20;
+    float desiredseparation = 30;
     Vector steering(0, 0);
     int count = 0;
     for (int i = 0; i < Agents.size(); i++) {
@@ -110,19 +110,20 @@ Vector Agent::seek(const Vector& v)
     return acceleration;
 }
 
-void Agent::update()
+void Agent::update(double dt)
 {
-    acceleration.mulScalar(.4);
+    acceleration.mulScalar(0.4);
     velocity.addVector(acceleration);
+    velocity.mulScalar(200 * dt);
     velocity.limit(maxSpeed);
     location.addVector(velocity);
     acceleration.mulScalar(0);
 }
 
-void Agent::run(const vector <Agent>& v)
+void Agent::run(const vector <Agent>& v, double dt)
 {
     swarm(v);
-    update();
+    update(dt);
     edges();
 }
 

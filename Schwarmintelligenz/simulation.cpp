@@ -4,9 +4,11 @@
 Simulation::Simulation(int numAgents) : fps(0), mspf(0)
 {
     //Initialize Agents
+
+
     for (int i = 0; i < numAgents; i++)
     {
-        Agent agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 500, 700);
+        Agent agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 800, 600);
         //agent.setAffiliation(1);
         agents.push_back(agent);
     }
@@ -19,7 +21,10 @@ void Simulation::update()
 	// update timer
 	timer.tick();
 	calculateFrameStatistics();
-	double deltaT = timer.getDeltaTime();
+	for (unsigned int i = 0; i < agents.size(); i++)
+	{
+		agents[i].run(agents, timer.getDeltaTime());
+	}
 }
 
 void Simulation::calculateFrameStatistics()

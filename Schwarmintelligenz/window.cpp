@@ -90,7 +90,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         PostQuitMessage(0);
         break;
 
-    case WM_KEYUP:
+    case WM_KEYDOWN:
         if (wParam == VK_LEFT && selectedAgent > 0)
         {
             selectedAgent--;
