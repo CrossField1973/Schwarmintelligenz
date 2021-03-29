@@ -35,6 +35,7 @@ Agent::Agent(float x, float y, int world_width, int world_height)
     location = Vector(x, y);
     w_width = world_width;
     w_height = world_height;
+    neighbor = 0;
 }
 
 
@@ -44,7 +45,17 @@ void Agent::applyForce(const Vector& force)
     acceleration.addVector(force);
 }
 
-
+void Agent::getNeighbor(const vector<Agent>& Agents)
+{
+    float neighbordist = 50;
+    neighbor = 0;
+    for (int i = 0; i < Agents.size(); i++) {
+        float d = location.distance(Agents[i].location);
+        if ((d > 0) && (d < neighbordist) && swarmB == Agents[i].swarmB) {
+            neighbor++;
+        }
+    }
+}
 
 Vector Agent::separation(const vector<Agent>& Agents)
 {
@@ -62,7 +73,7 @@ Vector Agent::separation(const vector<Agent>& Agents)
             steering.addVector(diff);
             count++;
         }
-        else if ((d > 0) && (d < desiredseparation + 70) && swarmB !=  Agents[i].swarmB ) {
+        else if ((d > 0) && (d < desiredseparation + 70) && swarmB !=  Agents[i].swarmB && neighbor <= Agents[i].neighbor) {
             Vector diffB(0, 0);
             diffB = diffB.subTwoVector(location, Agents[i].location);
             diffB.mulScalar(900);
@@ -153,6 +164,7 @@ void Agent::update(double dt)
 
 void Agent::swarm(const vector<Agent>& v)
 {
+    getNeighbor(v);
     Vector sep = separation(v);
     Vector ali = align(v);
     Vector coh = cohesion(v);

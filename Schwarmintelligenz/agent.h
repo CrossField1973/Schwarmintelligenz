@@ -14,10 +14,12 @@ public:
     float maxForce;
     int w_width;
     int w_height;
+    int neighbor;
     Agent() {}
     Agent(float x, float y, int world_width, int world_height);
     Agent(float x, float y, int world_width, int world_height, bool checkSwarmB);
     void applyForce(const Vector& force);
+    void getNeighbor(const vector<Agent>& Agents);
     Vector separation(const vector<Agent>& Agents);
     Vector align(const vector<Agent>& Agents);
     Vector cohesion(const vector<Agent>& Agents);
