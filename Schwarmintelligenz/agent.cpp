@@ -70,6 +70,13 @@ Vector Agent::separation(const vector<Agent>& Agents)
             steering.addVector(diff);
             count++;
         }
+        if ((d > 0) && (d < desiredseparation + 70) && swarmB == true && Agents[i].swarmB == false) {
+            Vector diffB(0, 0);
+            diffB = diffB.subTwoVector(location, Agents[i].location);
+            diffB.mulScalar(900);
+            steering.addVector(diffB);
+            count++;
+        }
         else if ((d > 0) && (d < desiredseparation + 70) && swarmB == false && Agents[i].swarmB == true) {
             Vector diffB(0, 0);
             diffB = diffB.subTwoVector(location, Agents[i].location);
