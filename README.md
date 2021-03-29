@@ -7,6 +7,27 @@ Folgend wird ein zweiter Schwarm erstellt, wobei beide Schwärme sich aus dem We
 # Idee
 Wenn sich einzelne Agenten vom Schwarm trennen, können diese von Agenten des anderen Schwarms gefangen genommen werden, wenn die Gegenerischen Agenten in der überzahl sind. Die gegnerischen Agenten bringen dann die "gefangenen" Agenten zum eigenen Schwarm und verleiben diese nach einer gewissen Zeit dem eigenen Schwarm ein.
 
+- 2 schwärme (A,B)
+- Basis Verhalten von Agenten:
+	Agenten versuchen fremde Agenten zu meiden
+	Agenten suchen Kameraden
+	Schwärme teilen sich ab gewisser größer
+
+
+- Angriffsverhalten
+	Schwärme nähern sich gegenseitig an (suchen "dünne" Agentenschicht)
+	Angriff auf schweif: wenn Agentenschicht schicht dünn genug -> durchstoß um agenten zu "fressen"
+	5% boost für "bite"
+	nach Angriff "Rückzug" (bzw. generelles vermeiden "dünner" Agentenschichten -> zusammenziehen)
+	"Durchfressene" Agenten wechseln die Zugehörigkeit
+	
+- Defensiv verhalten
+	Wenn gegn. Angriff bevorsteht: Ausweichmanöver (5% boost als Schwarmbonus)
+	
+
+- Gewinner ist letzter Schwarm
+ 
+-> keine "wilden" Agenten mehr, Solo-Agenten suchen finden entweder Schwarm oder werden gefressen
 
 ## TO-DO
 ### UI (Kevin)
