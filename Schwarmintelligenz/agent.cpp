@@ -46,7 +46,7 @@ void Agent::applyForce(const Vector& force)
 
 Vector Agent::separation(const vector<Agent>& Agents)
 {
-    float desiredseparation = 10;
+    float desiredseparation = 20;
     Vector steering(0, 0);
     int count = 0;
     for (int i = 0; i < Agents.size(); i++) {
