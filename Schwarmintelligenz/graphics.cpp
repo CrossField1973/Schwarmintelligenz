@@ -91,7 +91,7 @@ void Graphics::DrawAgent(int posX, int posY, float angleDeg, float size, ID2D1So
 
 
     //TEST
-    D2D1_POINT_2F pt1 = { size * cos(angleDegreeToDecimal(angleDeg)) + posX, size * sin(angleDegreeToDecimal(angleDeg)) + posY };
+    D2D1_POINT_2F pt1 = { 1.7 * size * cos(angleDegreeToDecimal(angleDeg)) + posX, 1.7 * size * sin(angleDegreeToDecimal(angleDeg)) + posY };
     D2D1_POINT_2F pt2 = { size * cos(angleDegreeToDecimal(angleDeg + 120)) + posX, size * sin(angleDegreeToDecimal(angleDeg + 120)) + posY };
     D2D1_POINT_2F pt3 = { size * cos(angleDegreeToDecimal(angleDeg + 240)) + posX, size * sin(angleDegreeToDecimal(angleDeg + 240)) + posY };
 
@@ -118,24 +118,48 @@ void Graphics::DrawAgents(std::vector<Agent> agents, D2D1::ColorF baseColor)
     ID2D1SolidColorBrush* pBaseColor;
     ID2D1SolidColorBrush* pShadowColor;
 
+    ID2D1SolidColorBrush* pBaseColorB;
+    ID2D1SolidColorBrush* pShadowColorB;
+
+    // Swarm a color
     hr = m_pRenderTarget->CreateSolidColorBrush(
-        baseColor,
+        D2D1::ColorF(1.0f, 0.5f, 0.5f),
         &pBaseColor
     );
 
     hr = m_pRenderTarget->CreateSolidColorBrush(
-        D2D1::ColorF(baseColor.r - 20.0f / 255.0f, baseColor.g - 20.0f / 255.0f, baseColor.b - 20.0f / 255.0f),
+        D2D1::ColorF(1.0f - 20.0f / 255.0f, 0.5f - 20.0f / 255.0f, 0.5f - 20.0f / 255.0f),
         &pShadowColor
+    );
+
+    // Swarm b color
+    hr = m_pRenderTarget->CreateSolidColorBrush(
+        D2D1::ColorF(0.5f, 0.5f, 1.0f),
+        &pBaseColorB
+    );
+
+    hr = m_pRenderTarget->CreateSolidColorBrush(
+        D2D1::ColorF(0.5f - 20.0f / 255.0f, 0.5f - 20.0f / 255.0f, 1.0f - 20.0f / 255.0f),
+        &pShadowColorB
     );
 
     int i = 0;
     for (Agent agent : agents)
     {
-        //Draw Agent Shadow
-        DrawAgent(agent.location.x + 1.0f, agent.location.y + 1.0f, agent.angle(agent.velocity), 10.0f, pShadowColor);
+        if (!agent.swarmB) {
+            //Draw Agent Shadow
+            DrawAgent(agent.location.x + 1.0f, agent.location.y + 1.0f, agent.angle(agent.velocity), 10.0f, pShadowColor);
 
-        //Draw Agent
-        DrawAgent(agent.location.x, agent.location.y, agent.angle(agent.velocity), 10.0f, pBaseColor);
+            //Draw Agent
+            DrawAgent(agent.location.x, agent.location.y, agent.angle(agent.velocity), 10.0f, pBaseColor);
+        }
+        else {
+            //Draw Agent Shadow
+            DrawAgent(agent.location.x + 1.0f, agent.location.y + 1.0f, agent.angle(agent.velocity), 10.0f, pShadowColorB);
+
+            //Draw Agent
+            DrawAgent(agent.location.x, agent.location.y, agent.angle(agent.velocity), 10.0f, pBaseColorB);
+        }      
 
         std::wostringstream agentNumberString;
         agentNumberString << i << std::endl;
