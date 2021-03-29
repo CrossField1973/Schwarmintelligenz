@@ -44,6 +44,8 @@ void Agent::applyForce(const Vector& force)
     acceleration.addVector(force);
 }
 
+
+
 Vector Agent::separation(const vector<Agent>& Agents)
 {
     float desiredseparation = 20;
@@ -51,18 +53,8 @@ Vector Agent::separation(const vector<Agent>& Agents)
     int count = 0;
     for (int i = 0; i < Agents.size(); i++) {
         float d = location.distance(Agents[i].location);
-        if ((d > 0) && (d < desiredseparation) && swarmB == false
-            && Agents[i].swarmB == false) {
-            Vector diff(0,0);
-            diff = diff.subTwoVector(location, Agents[i].location);
-            diff.normalize();
-            diff.divScalar(d);      
-            steering.addVector(diff);
-            count++;
-        }
-
-        if ((d > 0) && (d < desiredseparation) && swarmB == true
-            && Agents[i].swarmB == true) {
+        
+        if ((d > 0) && (d < desiredseparation) && swarmB == Agents[i].swarmB ) {
             Vector diff(0, 0);
             diff = diff.subTwoVector(location, Agents[i].location);
             diff.normalize();
@@ -70,20 +62,14 @@ Vector Agent::separation(const vector<Agent>& Agents)
             steering.addVector(diff);
             count++;
         }
-        if ((d > 0) && (d < desiredseparation + 70) && swarmB == true && Agents[i].swarmB == false) {
+        else if ((d > 0) && (d < desiredseparation + 70) && swarmB !=  Agents[i].swarmB ) {
             Vector diffB(0, 0);
             diffB = diffB.subTwoVector(location, Agents[i].location);
             diffB.mulScalar(900);
             steering.addVector(diffB);
             count++;
         }
-        else if ((d > 0) && (d < desiredseparation + 70) && swarmB == false && Agents[i].swarmB == true) {
-            Vector diffB(0, 0);
-            diffB = diffB.subTwoVector(location, Agents[i].location);
-            diffB.mulScalar(900);
-            steering.addVector(diffB);
-            count++;
-        }
+       
     }
     if (count > 0)
         steering.divScalar((float)count);
@@ -163,13 +149,6 @@ void Agent::update(double dt)
     velocity.mulScalar(100 * dt);
     location.addVector(velocity);
     acceleration.mulScalar(0);
-}
-
-void Agent::run(const vector <Agent>& v, double dt)
-{
-    swarm(v);
-    update(dt);
-    edges();
 }
 
 void Agent::swarm(const vector<Agent>& v)

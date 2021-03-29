@@ -22,7 +22,6 @@ public:
     Vector align(const vector<Agent>& Agents);
     Vector cohesion(const vector<Agent>& Agents);
     Vector seek(const Vector& v);
-    void run(const vector<Agent>& v, double dt);
     void update(double dt);
     void swarm(const vector<Agent>& v);
     void edges();
