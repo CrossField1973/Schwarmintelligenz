@@ -1,6 +1,2 @@
-*
-!Schwarmintelligenz/*.cpp
-!Schwarmintelligenz/*.h
-!*.sln
-!*.md
-!*.gitignore
+x64/
+.vs/
