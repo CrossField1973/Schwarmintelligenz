@@ -9,6 +9,7 @@
 
 Agent::Agent(float x, float y, int world_width, int world_height)
 {
+    overtakenPercentage = 0.0;
     swarmB = false;
     acceleration = Vector(0, 0);
     velocity = Vector(rand()%3 - 2, rand()%3 - 2);
@@ -22,6 +23,7 @@ Agent::Agent(float x, float y, int world_width, int world_height)
  Agent::Agent(float x, float y, int world_width, int world_height, bool checkSwarmB)
  {
     swarmB = checkSwarmB;
+    overtakenPercentage = 0.0;
     if (swarmB == true) {
         maxSpeed = 400;
         maxForce = 0.5;
@@ -57,7 +59,7 @@ void Agent::getNeighbor(const vector<Agent>& Agents)
     }
 }
 
-Vector Agent::separation(const vector<Agent>& Agents)
+Vector Agent::separation(const vector<Agent>& Agents, double dt)
 {
     float desiredseparation = 20;
     Vector steering(0, 0);
@@ -74,6 +76,7 @@ Vector Agent::separation(const vector<Agent>& Agents)
             count++;
         }
         else if ((d > 0) && (d < desiredseparation + 70) && swarmB !=  Agents[i].swarmB && neighbor <= Agents[i].neighbor) {
+            overtakenPercentage += 0.3*dt;
             Vector diffB(0, 0);
             diffB = diffB.subTwoVector(location, Agents[i].location);
             diffB.mulScalar(900);
@@ -162,10 +165,21 @@ void Agent::update(double dt)
     acceleration.mulScalar(0);
 }
 
-void Agent::swarm(const vector<Agent>& v)
+void Agent::swarm(const vector<Agent>& v, double dt)
 {
+    if (overtakenPercentage >= 1.0) {
+        overtakenPercentage = 0.0;
+        if (swarmB) {
+            maxSpeed = 200;
+            swarmB = false;
+        }
+        else {
+            maxSpeed = 400;
+            swarmB = true;
+        }
+    }
     getNeighbor(v);
-    Vector sep = separation(v);
+    Vector sep = separation(v, dt);
     Vector ali = align(v);
     Vector coh = cohesion(v);
     sep.mulScalar(1.5);

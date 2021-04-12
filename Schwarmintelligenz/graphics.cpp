@@ -214,6 +214,7 @@ HRESULT Graphics::render(Simulation simulation, HWND hwnd)
         outFPSString << "FPS: " << simulation.fps << std::endl;
         outFPSString << "Simulation Time: " << int(simulation.timer.getTotalTime()) << " Sekunden" << std::endl;
         outFPSString << "Agent_" << simulation.selectedAgent << " posX: " << round(int(simulation.agents[simulation.selectedAgent].location.x)) << " posY: " << round(int(simulation.agents[simulation.selectedAgent].location.y)) << std::endl;
+        outFPSString << "Overtaken " << simulation.agents[simulation.selectedAgent].overtakenPercentage << " Percentage" << std::endl;
         std::wstring outFPSText = outFPSString.str();
 
         m_pRenderTarget->DrawTextW(
