@@ -16,7 +16,7 @@ Timer::Timer() : startTime(0), currentTime(0), previousTime(0), secondsPerCount(
 void Timer::reset()
 {
 	// this function resets the timer
-	long long int now = 0;
+	__int64 now = 0;
 	if (QueryPerformanceCounter((LARGE_INTEGER*)&now))
 	{
 		startTime = now;
@@ -40,10 +40,9 @@ void Timer::tick()
 
 		// deltaTime can be negative if the processor goes idle for example
 		if (deltaTime < 0.0)
+		{
 			deltaTime = 0.0;
-
-		// return success
-		return;
+		}
 	}
 }
 

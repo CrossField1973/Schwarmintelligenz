@@ -22,6 +22,12 @@
     <ClCompile Include="Vector.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="graphics2.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics3.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="agent.h">
@@ -40,6 +46,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics2.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics3.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

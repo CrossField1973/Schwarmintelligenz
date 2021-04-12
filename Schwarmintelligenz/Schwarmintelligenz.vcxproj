@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClCompile Include="agent.cpp" />
     <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="graphics2.cpp" />
+    <ClCompile Include="graphics3.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="simulation.cpp" />
     <ClCompile Include="timer.cpp" />
@@ -150,6 +152,8 @@
   <ItemGroup>
     <ClInclude Include="agent.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="graphics2.h" />
+    <ClInclude Include="graphics3.h" />
     <ClInclude Include="simulation.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="Vector.h" />

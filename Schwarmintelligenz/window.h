@@ -1,12 +1,8 @@
 #pragma once
 
 #include <windows.h>
-#include <d2d1.h>
-#include <d2d1helper.h>
 #include "simulation.h"
 
-
-#pragma comment(lib, "d2d1.lib")
 
 class Window
 {
@@ -14,9 +10,11 @@ class Window
 	static LRESULT CALLBACK HandleMsgThunk(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	LRESULT HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 public:
-	Window(HINSTANCE hInstance);
+	Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName);
 	~Window();
 	HWND m_hwnd;
-	unsigned int selectedAgent = 0;
-	int numAgents = 0;
+	float m_width;
+	float m_height;
+	unsigned int m_selectedAgent;
+	int m_numAgents;
 };

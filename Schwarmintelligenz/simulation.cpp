@@ -1,21 +1,21 @@
 #include "simulation.h"
 #include <random>
 
-Simulation::Simulation(int numAgents) : fps(0), mspf(0)
+Simulation::Simulation(int numAgents, int width, int height) : fps(0), mspf(0), worldWidth(0), worldHeight(0)
 {
 	//Initialize Agents
-
+	worldWidth = width;
+	worldHeight = height;
 
 	for (int i = 0; i < numAgents / 2; i++)
 	{
-		Agent agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 1200, 720, false);
-		//agent.setAffiliation(1);
+		Agent agent(rand() % this->worldWidth + 1, rand() % this->worldHeight + 1, worldWidth, worldHeight, false);
 		agents.push_back(agent);
 	}
 
 	for (int i = 0; i < numAgents/2; i++)
 	{
-		Agent  agent(rand() % this->worldWith + 1, rand() % this->worldHeight + 1, 1200, 720, true);
+		Agent  agent(rand() % this->worldWidth + 1, rand() % this->worldHeight + 1, worldWidth, worldHeight, true);
 		agents.push_back(agent);
 	}
 	timer.reset();

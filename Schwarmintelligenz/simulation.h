@@ -11,10 +11,10 @@ public:
 	int fps;
 	double mspf;
 	std::vector<Agent> agents = {};
-	int worldWith = 1200;
-	int worldHeight = 720;
+	int worldWidth;
+	int worldHeight;
 	unsigned int selectedAgent = 0;
-	Simulation(int numAgents);
+	Simulation(int numAgents, int width, int height);
 	void update();
 
 	void calculateFrameStatistics();

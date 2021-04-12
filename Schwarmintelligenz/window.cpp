@@ -1,14 +1,11 @@
 // Windows Header Files:
 #include "window.h"
-#include <windows.h>
 
-
-Window::Window(HINSTANCE hInstance)
+Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName) : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0)
 {
-    // Initialize device-indpendent resources, such
-    // as the Direct2D factory.
-    // 
-    // Register the window class.
+    m_width = width;
+    m_height = height;
+
     WNDCLASSEX wcex;
     ZeroMemory(&wcex, sizeof(WNDCLASSEX));
     wcex.cbSize = sizeof(WNDCLASSEX);
@@ -24,12 +21,12 @@ Window::Window(HINSTANCE hInstance)
     RegisterClassEx(&wcex);
 
     // Create the window. 
-    RECT rc = { 0, 0, 1200, 720 };
+    RECT rc = { 0, 0, width, height};
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
     m_hwnd = CreateWindow(
         L"SimulationWindow",
-        L"Schwarm Simulation",
+        windowName,
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
@@ -91,13 +88,13 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_KEYDOWN:
-        if (wParam == VK_LEFT && selectedAgent > 0)
+        if (wParam == VK_LEFT && m_selectedAgent > 0)
         {
-            selectedAgent--;
+            m_selectedAgent--;
         }
-        else if (wParam == VK_RIGHT && selectedAgent < numAgents - 1)
+        else if (wParam == VK_RIGHT && m_selectedAgent < m_numAgents - 1)
         {
-            selectedAgent++;
+            m_selectedAgent++;
         }
         break;
 
