@@ -1,9 +1,6 @@
 *
+!Schwarmintelligenz/*.cpp
+!Schwarmintelligenz/*.h
 !*.sln
 !*.md
-!*.cpp
-!*.h
-!*.proj
-!*.filters
-!*.user
 !*.gitignore
