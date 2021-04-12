@@ -28,7 +28,7 @@ void Simulation::update()
 	calculateFrameStatistics();
 	for (unsigned int i = 0; i < agents.size(); i++)
 	{
-		agents[i].swarm(agents);
+		agents[i].swarm(agents, timer.getDeltaTime());
 	}
 	for (unsigned int l = 0; l < agents.size(); l++)
 	{
