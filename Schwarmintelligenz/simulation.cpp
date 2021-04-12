@@ -1,7 +1,7 @@
 #include "simulation.h"
 #include <random>
 
-Simulation::Simulation(int numAgents, int width, int height) : fps(0), mspf(0), worldWidth(0), worldHeight(0)
+Simulation::Simulation(int numAgents, int width, int height) : fps(0), mspf(0), worldWidth(0), worldHeight(0), speed(1)
 {
 	//Initialize Agents
 	worldWidth = width;
@@ -28,11 +28,11 @@ void Simulation::update()
 	calculateFrameStatistics();
 	for (unsigned int i = 0; i < agents.size(); i++)
 	{
-		agents[i].swarm(agents, timer.getDeltaTime());
+		agents[i].swarm(agents, timer.getDeltaTime() * speed);
 	}
 	for (unsigned int l = 0; l < agents.size(); l++)
 	{
-		agents[l].update(timer.getDeltaTime());
+		agents[l].update(timer.getDeltaTime() * speed);
 		agents[l].edges();
 	}
 }

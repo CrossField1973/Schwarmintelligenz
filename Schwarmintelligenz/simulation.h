@@ -10,6 +10,7 @@ public:
 	Timer timer;
 	int fps;
 	double mspf;
+	float speed;
 	std::vector<Agent> agents = {};
 	int worldWidth;
 	int worldHeight;

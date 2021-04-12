@@ -15,6 +15,7 @@ public:
 	HWND m_hwnd;
 	float m_width;
 	float m_height;
+	float m_speed;
 	unsigned int m_selectedAgent;
 	int m_numAgents;
 };

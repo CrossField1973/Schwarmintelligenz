@@ -1,7 +1,7 @@
 // Windows Header Files:
 #include "window.h"
 
-Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName) : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0)
+Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName) : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0), m_speed(1)
 {
     m_width = width;
     m_height = height;
@@ -95,6 +95,14 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         else if (wParam == VK_RIGHT && m_selectedAgent < m_numAgents - 1)
         {
             m_selectedAgent++;
+        }
+        else if (wParam == VK_UP && m_speed < 10)
+        {
+            m_speed += 0.5;
+        }
+        else if (wParam == VK_DOWN && m_speed > 0.5)
+        {
+            m_speed -= 0.5;
         }
         break;
 

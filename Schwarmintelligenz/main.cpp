@@ -28,6 +28,7 @@ int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdL
             else
             {
                 simulation.update();
+                simulation.speed = window.m_speed;
                 simulation.selectedAgent = window.m_selectedAgent;
                 graphics.render();
             }
