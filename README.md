@@ -4,7 +4,10 @@ Ein kleinen C++ Programm, welches Schwarm/Schwärme simuliert und dies graphisch
 Zuerst wird ein Schwarm modelliert, welcher einen Anführer hat der sich per zufall fortbewegt. Der schwarm folgt dem Anführer.
 Folgend wird ein zweiter Schwarm erstellt, wobei beide Schwärme sich aus dem Weg gehen.
 
-# Idee
+# Idee 
+Wenn ein Agent in Kontakt mit einem anderem Agenten, welcher Teil eines größeren Schwarms ist, wird dieser Schrittweise Teil des größeren Schwarms, bis dieser vollkommen Teil des größeren Schwarms wird. 
+
+# Idee (Deprecated)
 Wenn sich einzelne Agenten vom Schwarm trennen, können diese von Agenten des anderen Schwarms gefangen genommen werden, wenn die Gegenerischen Agenten in der überzahl sind. Die gegnerischen Agenten bringen dann die "gefangenen" Agenten zum eigenen Schwarm und verleiben diese nach einer gewissen Zeit dem eigenen Schwarm ein.
 
 - 2 schwärme (A,B)
