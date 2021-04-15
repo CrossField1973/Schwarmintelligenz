@@ -165,24 +165,15 @@ void Graphics3::DrawAgents(std::vector<Agent> agents)
     for (Agent agent : agents)
     {
         // Draw Agent
-        if (!agent.swarmB) 
-        {
-            //Draw Agent Shadow
-            DrawAgent(agent.location.x + 1.0f, agent.location.y + 1.0f, agent.angle(agent.velocity), 15.0f, agent.swarmB, agent.overtakenPercentage, true);
+        //Draw Agent Shadow
+        DrawAgent(agent.location.x + 2.0f, agent.location.y + 2.0f, agent.angle(agent.velocity), 15.0f, agent.swarmB, agent.overtakenPercentage, true);
 
-            //Draw Agent
-            DrawAgent(agent.location.x, agent.location.y, agent.angle(agent.velocity), 15.0f, agent.swarmB, agent.overtakenPercentage, false);
-        }
-        else {
-            //Draw Agent Shadow
-            DrawAgent(agent.location.x + 1.0f, agent.location.y + 1.0f, agent.angle(agent.velocity), 15.0f, agent.swarmB, agent.overtakenPercentage, true);
+        //Draw Agent
+        DrawAgent(agent.location.x, agent.location.y, agent.angle(agent.velocity), 15.0f, agent.swarmB, agent.overtakenPercentage, false);
 
-            //Draw Agent
-            DrawAgent(agent.location.x, agent.location.y, agent.angle(agent.velocity), agent.swarmB, 15.0f, agent.overtakenPercentage, false);
-        }
 
         // Draw number
-        agentNumberString.seekp(0);
+        /*agentNumberString.seekp(0);
         if (agent.swarmB) {
             agentNumberString << "B";
         }
@@ -202,7 +193,7 @@ void Graphics3::DrawAgents(std::vector<Agent> agents)
             m_pBlackBrush.Get()
         );
 
-        i++;
+        i++;*/
     }
 }
 
@@ -242,9 +233,9 @@ void Graphics3::DrawAgent(int posX, int posY, float angleDeg, float size, bool s
     }
     if (isShadow)
     {
-        color[0] = color[0] - 0.1;
-        color[1] = color[1] - 0.1;
-        color[2] = color[2] - 0.1;
+        color[0] = color[0] - 0.2;
+        color[1] = color[1] - 0.2;
+        color[2] = color[2] - 0.2;
     }
 
     m_pDirect2dRenderTarget->CreateSolidColorBrush(

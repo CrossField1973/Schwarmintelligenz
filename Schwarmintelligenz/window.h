@@ -2,7 +2,7 @@
 
 #include <windows.h>
 #include "simulation.h"
-
+#include "resource.h"
 
 class Window
 {
@@ -16,6 +16,7 @@ public:
 	float m_width;
 	float m_height;
 	float m_speed;
+	bool m_isPaused;
 	unsigned int m_selectedAgent;
 	int m_numAgents;
 };

@@ -1,7 +1,8 @@
 // Windows Header Files:
 #include "window.h"
 
-Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName) : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0), m_speed(1)
+Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName) 
+    : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0), m_speed(1), m_isPaused(false)
 {
     m_width = width;
     m_height = height;
@@ -14,6 +15,7 @@ Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowNam
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
     wcex.hInstance = hInstance;
+    wcex.hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1));
     wcex.hbrBackground = NULL;
     wcex.lpszMenuName = NULL;
     wcex.lpszClassName = L"SimulationWindow";
@@ -96,6 +98,10 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             m_selectedAgent++;
         }
+        else if (wParam == 'P')
+        {
+            m_isPaused = !m_isPaused;
+        }
         else if (wParam == VK_UP && m_speed < 10)
         {
             m_speed += 0.5;
@@ -103,7 +109,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         else if (wParam == VK_DOWN && m_speed > 0.5)
         {
             m_speed -= 0.5;
-        }
+        }       
         break;
 
         // Note that this tutorial does not handle resizing (WM_SIZE) requests,

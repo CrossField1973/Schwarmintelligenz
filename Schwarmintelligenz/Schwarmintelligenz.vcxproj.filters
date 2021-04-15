@@ -54,6 +54,9 @@
     <ClInclude Include="graphics3.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Ressourcedateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headerdateien">
@@ -62,5 +65,18 @@
     <Filter Include="Quelldateien">
       <UniqueIdentifier>{686603da-718c-4407-b38f-d3c06226ef92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ressourcedateien">
+      <UniqueIdentifier>{9e726022-8168-43b4-9474-d26960dc59d2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Pictures\icon.ico">
+      <Filter>Ressourcedateien</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Ressourcedateien</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -25,7 +25,7 @@ int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdL
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
             }
-            else
+            else if (!window.m_isPaused)
             {
                 simulation.update();
                 simulation.speed = window.m_speed;

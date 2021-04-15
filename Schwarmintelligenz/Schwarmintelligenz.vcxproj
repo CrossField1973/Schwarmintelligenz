@@ -154,10 +154,17 @@
     <ClInclude Include="graphics.h" />
     <ClInclude Include="graphics2.h" />
     <ClInclude Include="graphics3.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="simulation.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Pictures\icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
