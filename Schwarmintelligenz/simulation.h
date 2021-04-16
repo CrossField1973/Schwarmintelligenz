@@ -14,6 +14,9 @@ public:
 	std::vector<Agent> agents = {};
 	int worldWidth;
 	int worldHeight;
+	int numAgents;
+	int numAgentsA;
+	int numAgentsB;
 	unsigned int selectedAgent = 0;
 	Simulation(int numAgents, int width, int height);
 	void update();

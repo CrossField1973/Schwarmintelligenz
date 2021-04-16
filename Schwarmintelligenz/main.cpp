@@ -16,6 +16,7 @@ int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdL
         window.m_numAgents = NUM_AGENTS;
         Simulation simulation(NUM_AGENTS, WIDTH, HEIGHT);
         Graphics3 graphics(window.m_hwnd, WIDTH, HEIGHT, &simulation);
+        window.setSimulation(&simulation);
 
         MSG msg = { 0 };
         while (WM_QUIT != msg.message)
@@ -27,6 +28,7 @@ int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdL
             }
             else if (!window.m_isPaused)
             {
+                
                 simulation.update();
                 simulation.speed = window.m_speed;
                 simulation.selectedAgent = window.m_selectedAgent;

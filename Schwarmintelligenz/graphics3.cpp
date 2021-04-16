@@ -160,7 +160,8 @@ HRESULT Graphics3::CreateBrushes()
 
 void Graphics3::DrawAgents(std::vector<Agent> agents)
 {
-    int i = 0;
+    int a = 0;
+    int b = 0;
 
     for (Agent agent : agents)
     {
@@ -173,15 +174,19 @@ void Graphics3::DrawAgents(std::vector<Agent> agents)
 
 
         // Draw number
-        /*agentNumberString.seekp(0);
+       /* agentNumberString.seekp(0);
         if (agent.swarmB) {
             agentNumberString << "B";
+            agentNumberString << b << std::endl;
+            b++;
         }
         else
         {
             agentNumberString << "A";
+            agentNumberString << a << std::endl;
+            a++;
         }
-        agentNumberString << i << std::endl;
+        
         agentNumberText.empty();
         agentNumberText = agentNumberString.str();
 
@@ -191,9 +196,7 @@ void Graphics3::DrawAgents(std::vector<Agent> agents)
             m_pSergeoTextFormat.Get(),
             D2D1::RectF(agent.location.x, agent.location.y, 1200.0f, 720.0f),
             m_pBlackBrush.Get()
-        );
-
-        i++;*/
+        );*/
     }
 }
 
@@ -276,7 +279,11 @@ void Graphics3::render()
         outFPSString << "A" << m_pSimulation->selectedAgent;
     }
 
-    outFPSString << " posX: " << helper.round(int(m_pSimulation->agents[m_pSimulation->selectedAgent].location.x)) << " posY: " << helper.round(int(m_pSimulation->agents[m_pSimulation->selectedAgent].location.y)) << std::endl;
+    outFPSString << " posX: " << helper.round(int(m_pSimulation->agents[m_pSimulation->selectedAgent].location.x));
+    outFPSString << " posY: " << helper.round(int(m_pSimulation->agents[m_pSimulation->selectedAgent].location.y));
+    outFPSString << " overtaken: " << float(int(m_pSimulation->agents[m_pSimulation->selectedAgent].overtakenPercentage * 100)) / 100 << "%" << std::endl;
+
+    outFPSString << "Agents Total: " << m_pSimulation->numAgents << " A: " << m_pSimulation->numAgentsA << " B: " << m_pSimulation->numAgentsB << std::endl;
     std::wstring outFPSText = outFPSString.str();
 
     m_pDirect2dRenderTarget->DrawTextW(
@@ -289,7 +296,7 @@ void Graphics3::render()
 
     //End Draw
     m_pDirect2dRenderTarget->EndDraw();
-    m_pDxgiSwapChain->Present(0, 0);
+    m_pDxgiSwapChain->Present(1, 0);
 }
 
 Graphics3::Graphics3(HWND hwnd, float width, float height, Simulation* pSimulation)

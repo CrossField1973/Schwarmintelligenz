@@ -1,11 +1,16 @@
 #include "simulation.h"
 #include <random>
 
-Simulation::Simulation(int numAgents, int width, int height) : fps(0), mspf(0), worldWidth(0), worldHeight(0), speed(1)
+Simulation::Simulation(int numAgents, int width, int height) 
+	: fps(0), mspf(0), worldWidth(0), worldHeight(0), speed(1), numAgents(0), numAgentsA(0), numAgentsB(0)
 {
 	//Initialize Agents
 	worldWidth = width;
 	worldHeight = height;
+	this->numAgents = numAgents;
+	numAgentsA = numAgents / 2;
+	numAgentsB = numAgents / 2;
+
 
 	for (int i = 0; i < numAgents / 2; i++)
 	{
@@ -23,18 +28,33 @@ Simulation::Simulation(int numAgents, int width, int height) : fps(0), mspf(0), 
 
 void Simulation::update()
 {
-	// update timer
+	int tmpNumAgentA = 0;
+	int tmpNumAgentB = 0;
+
 	timer.tick();
 	calculateFrameStatistics();
 	for (unsigned int i = 0; i < agents.size(); i++)
 	{
 		agents[i].swarm(agents, timer.getDeltaTime() * speed);
+
+		// count agents in swarm
+		if (agents[i].swarmB) 
+		{
+			tmpNumAgentB++;
+		}
+		else
+		{
+			tmpNumAgentA++;
+		}
 	}
 	for (unsigned int l = 0; l < agents.size(); l++)
 	{
 		agents[l].update(timer.getDeltaTime() * speed);
 		agents[l].edges();
 	}
+
+	numAgentsA = tmpNumAgentA;
+	numAgentsB = tmpNumAgentB;
 }
 
 void Simulation::calculateFrameStatistics()

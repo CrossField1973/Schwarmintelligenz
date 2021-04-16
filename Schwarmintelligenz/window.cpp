@@ -1,8 +1,8 @@
 // Windows Header Files:
 #include "window.h"
 
-Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName) 
-    : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0), m_speed(1), m_isPaused(false)
+Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName)
+    : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0), m_speed(1), m_isPaused(false), m_pSimulation(NULL)
 {
     m_width = width;
     m_height = height;
@@ -45,6 +45,11 @@ Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowNam
 Window::~Window()
 {
     DestroyWindow(m_hwnd);
+}
+
+void Window::setSimulation(Simulation* simulation)
+{
+    m_pSimulation = simulation;
 }
 
 
@@ -109,7 +114,16 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         else if (wParam == VK_DOWN && m_speed > 0.5)
         {
             m_speed -= 0.5;
-        }       
+        }    
+        else if (wParam == 'R')
+        {
+            if (m_pSimulation != NULL) {
+                Simulation simulation(m_numAgents, m_width, m_height);
+                *m_pSimulation = simulation;
+                m_speed = 1;
+                m_selectedAgent = 1;
+            }           
+        }
         break;
 
         // Note that this tutorial does not handle resizing (WM_SIZE) requests,

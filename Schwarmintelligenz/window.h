@@ -12,6 +12,7 @@ class Window
 public:
 	Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName);
 	~Window();
+	Simulation* m_pSimulation;
 	HWND m_hwnd;
 	float m_width;
 	float m_height;
@@ -19,4 +20,5 @@ public:
 	bool m_isPaused;
 	unsigned int m_selectedAgent;
 	int m_numAgents;
+	void setSimulation(Simulation* simulation);
 };
