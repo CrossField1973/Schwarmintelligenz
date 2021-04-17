@@ -2,7 +2,7 @@
 #include "window.h"
 
 Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowName)
-    : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0), m_speed(1), m_isPaused(false), m_pSimulation(NULL)
+    : m_hwnd(NULL), m_width(0), m_height(0), m_selectedAgent(0), m_numAgents(0), m_speed(1), m_isPaused(false), m_pSimulation(NULL), m_pGraphics(NULL)
 {
     m_width = width;
     m_height = height;
@@ -16,6 +16,7 @@ Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowNam
     wcex.cbWndExtra = 0;
     wcex.hInstance = hInstance;
     wcex.hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1));
+    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = NULL;
     wcex.lpszMenuName = NULL;
     wcex.lpszClassName = L"SimulationWindow";
@@ -29,7 +30,7 @@ Window::Window(HINSTANCE hInstance, float width, float height, LPCWSTR windowNam
     m_hwnd = CreateWindow(
         L"SimulationWindow",
         windowName,
-        WS_OVERLAPPEDWINDOW,
+        WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
         rc.right - rc.left,
@@ -52,6 +53,10 @@ void Window::setSimulation(Simulation* simulation)
     m_pSimulation = simulation;
 }
 
+void Window::setGraphics(Graphics3* graphics)
+{
+    m_pGraphics = graphics;
+}
 
 //Win32 schenanigans to access member variables/functions from wndProc
 //Creadits to ChiliTomatoNoodle
@@ -94,6 +99,18 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         PostQuitMessage(0);
         break;
 
+    case WM_SIZE:
+        // If it is minimized or maximized and graphics is set
+        if ((wParam == 0 || wParam == 2) && m_pGraphics != NULL)
+        {
+            // Change drawing size          
+            m_width = LOWORD(lParam);
+            m_height = HIWORD(lParam);
+            
+            *m_pGraphics = Graphics3(m_hwnd, m_width, m_height, m_pSimulation, m_width / m_pSimulation->worldWidth, m_height / m_pSimulation->worldHeight);
+        }
+        break;
+
     case WM_KEYDOWN:
         if (wParam == VK_LEFT && m_selectedAgent > 0)
         {
@@ -105,6 +122,14 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         else if (wParam == 'P')
         {
+            if (m_isPaused)
+            {
+                m_pSimulation->timer.start();
+            }
+            else
+            {
+                m_pSimulation->timer.stop();
+            }
             m_isPaused = !m_isPaused;
         }
         else if (wParam == VK_UP && m_speed < 10)
@@ -117,7 +142,8 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }    
         else if (wParam == 'R')
         {
-            if (m_pSimulation != NULL) {
+            if (m_pSimulation != NULL) 
+            {
                 Simulation simulation(m_numAgents, m_width, m_height);
                 *m_pSimulation = simulation;
                 m_speed = 1;
@@ -125,9 +151,6 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }           
         }
         break;
-
-        // Note that this tutorial does not handle resizing (WM_SIZE) requests,
-        // so we created the window without the resize border.  
 
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

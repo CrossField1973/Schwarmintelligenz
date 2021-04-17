@@ -167,15 +167,32 @@ void Graphics3::DrawAgents(std::vector<Agent> agents)
     {
         // Draw Agent
         //Draw Agent Shadow
-        DrawAgent(agent.location.x + 2.0f, agent.location.y + 2.0f, agent.angle(agent.velocity), 15.0f, agent.swarmB, agent.overtakenPercentage, true);
+        DrawAgent(
+            agent.location.x * m_simulationDisplayPercentageX + 2.0f, 
+            agent.location.y * m_simulationDisplayPercentageY + 2.0f, 
+            agent.angle(agent.velocity), 
+            15.0f, 
+            agent.swarmB, 
+            agent.overtakenPercentage, 
+            true
+        );
 
         //Draw Agent
-        DrawAgent(agent.location.x, agent.location.y, agent.angle(agent.velocity), 15.0f, agent.swarmB, agent.overtakenPercentage, false);
+        DrawAgent(
+            agent.location.x * m_simulationDisplayPercentageX, 
+            agent.location.y * m_simulationDisplayPercentageY, 
+            agent.angle(agent.velocity), 
+            15.0f, 
+            agent.swarmB, 
+            agent.overtakenPercentage, 
+            false
+        );
 
 
         // Draw number
        /* agentNumberString.seekp(0);
-        if (agent.swarmB) {
+        if (agent.swarmB) 
+        {
             agentNumberString << "B";
             agentNumberString << b << std::endl;
             b++;
@@ -299,12 +316,10 @@ void Graphics3::render()
     m_pDxgiSwapChain->Present(1, 0);
 }
 
-Graphics3::Graphics3(HWND hwnd, float width, float height, Simulation* pSimulation)
+Graphics3::Graphics3(HWND hwnd, float width, float height, Simulation* pSimulation, float simulationDisplayPercentageX, float simulationDisplayPercentageY) : 
+    m_simulationDisplayPercentageX(simulationDisplayPercentageX), m_simulationDisplayPercentageY(simulationDisplayPercentageY), 
+    m_hwnd(hwnd), m_Width(width), m_Height(height), m_pSimulation(pSimulation)
 {
-	m_hwnd = hwnd;
-    m_Width = width;
-    m_Height = height;
-	m_pSimulation = pSimulation;
 	CreateDirect2dRenderTarget();
 	CreateBrushes();
 }

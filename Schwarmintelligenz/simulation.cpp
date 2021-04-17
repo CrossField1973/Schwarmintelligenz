@@ -1,17 +1,24 @@
 #include "simulation.h"
 #include <random>
 
-Simulation::Simulation(int numAgents, int width, int height) 
+Simulation::Simulation(int numAgents, int width, int height, int seed)
 	: fps(0), mspf(0), worldWidth(0), worldHeight(0), speed(1), numAgents(0), numAgentsA(0), numAgentsB(0)
 {
-	//Initialize Agents
 	worldWidth = width;
 	worldHeight = height;
 	this->numAgents = numAgents;
 	numAgentsA = numAgents / 2;
 	numAgentsB = numAgents / 2;
 
+	if (seed == -1) {
+		srand(time(NULL));
+	} 
+	else
+	{
+		srand(seed);
+	}
 
+	//Initialize Agents
 	for (int i = 0; i < numAgents / 2; i++)
 	{
 		Agent agent(rand() % this->worldWidth + 1, rand() % this->worldHeight + 1, worldWidth, worldHeight, false);

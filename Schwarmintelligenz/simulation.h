@@ -3,6 +3,9 @@
 #include <vector>
 #include "agent.h"
 #include "timer.h"
+#include <time.h>
+
+#define RANDOM -1
 
 class Simulation
 {
@@ -18,7 +21,7 @@ public:
 	int numAgentsA;
 	int numAgentsB;
 	unsigned int selectedAgent = 0;
-	Simulation(int numAgents, int width, int height);
+	Simulation(int numAgents, int width, int height, int seed=RANDOM);
 	void update();
 
 	void calculateFrameStatistics();

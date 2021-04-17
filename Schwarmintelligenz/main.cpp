@@ -17,6 +17,7 @@ int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdL
         Simulation simulation(NUM_AGENTS, WIDTH, HEIGHT);
         Graphics3 graphics(window.m_hwnd, WIDTH, HEIGHT, &simulation);
         window.setSimulation(&simulation);
+        window.setGraphics(&graphics);
 
         MSG msg = { 0 };
         while (WM_QUIT != msg.message)

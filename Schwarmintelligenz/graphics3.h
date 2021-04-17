@@ -34,6 +34,11 @@ private:
     float m_Width;
     float m_Height;
 
+    // rate at which the simulation will be drawn compared to the simulation size
+    float m_simulationDisplayPercentageX;
+    float m_simulationDisplayPercentageY;
+
+
     //Direct3D
     ComPtr<IDXGISwapChain> m_pDxgiSwapChain = nullptr;
     ComPtr<ID3D11Device> m_pDevice = nullptr;
@@ -73,6 +78,6 @@ private:
     void DrawAgent(int posX, int posY, float angleDeg, float size, bool swarmB, float overtakenPercentage, bool isShadow);
 
 public:
-    Graphics3(HWND hwnd, float width, float height, Simulation* pSimulation);
+    Graphics3(HWND hwnd, float width, float height, Simulation* pSimulation, float simulationDisplayPercentageX = 1, float simulationDisplayPercentageY = 1);
     void render();
 };
