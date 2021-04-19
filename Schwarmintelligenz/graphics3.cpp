@@ -287,20 +287,6 @@ void Graphics3::render()
     outFPSString << "Simulation Time: " << int(m_pSimulation->timer.getTotalTime()) << " Sekunden" << std::endl;
     outFPSString << "Simulation Speed: " << m_pSimulation->speed << "x" << std::endl;
     outFPSString << "Simulation Seed: " << m_pSimulation->m_seed << std::endl;
-    outFPSString << "Agent_";
-    if(m_pSimulation->agents[m_pSimulation->selectedAgent].swarmB) 
-    {
-        outFPSString << "B" << m_pSimulation->selectedAgent;
-    }
-    else
-    {
-        outFPSString << "A" << m_pSimulation->selectedAgent;
-    }
-
-    outFPSString << " posX: " << helper.round(int(m_pSimulation->agents[m_pSimulation->selectedAgent].location.x));
-    outFPSString << " posY: " << helper.round(int(m_pSimulation->agents[m_pSimulation->selectedAgent].location.y));
-    outFPSString << " overtaken: " << float(int(m_pSimulation->agents[m_pSimulation->selectedAgent].overtakenPercentage * 100)) / 100 << "%" << std::endl;
-
     outFPSString << "Agents Total: " << m_pSimulation->numAgents << " A: " << m_pSimulation->numAgentsA << " B: " << m_pSimulation->numAgentsB << std::endl;
     std::wstring outFPSText = outFPSString.str();
 

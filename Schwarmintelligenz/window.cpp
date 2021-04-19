@@ -134,11 +134,11 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         else if (wParam == VK_UP && m_speed < 10)
         {
-            m_speed += 0.5;
+            m_speed += 0.25;
         }
         else if (wParam == VK_DOWN && m_speed > 0.5)
         {
-            m_speed -= 0.5;
+            m_speed -= 0.25;
         }    
         else if (wParam == 'R')
         {
