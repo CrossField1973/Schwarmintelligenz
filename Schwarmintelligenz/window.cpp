@@ -144,13 +144,24 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             if (m_pSimulation != NULL) 
             {
-                Simulation simulation(m_numAgents, m_width, m_height);
+                Simulation simulation(m_numAgents, m_width, m_height, m_pSimulation->m_seed);
                 *m_pSimulation = simulation;
                 m_speed = 1;
                 m_selectedAgent = 1;
             }           
         }
+        else if (wParam == 'N')
+        {
+            if (m_pSimulation != NULL)
+            {
+                Simulation simulation(m_numAgents, m_width, m_height);
+                *m_pSimulation = simulation;
+                m_speed = 1;
+                m_selectedAgent = 1;
+            }
+        }
         break;
+
 
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

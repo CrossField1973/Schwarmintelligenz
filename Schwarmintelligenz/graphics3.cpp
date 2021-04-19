@@ -286,6 +286,7 @@ void Graphics3::render()
     outFPSString << "FPS: " << m_pSimulation->fps << std::endl;
     outFPSString << "Simulation Time: " << int(m_pSimulation->timer.getTotalTime()) << " Sekunden" << std::endl;
     outFPSString << "Simulation Speed: " << m_pSimulation->speed << "x" << std::endl;
+    outFPSString << "Simulation Seed: " << m_pSimulation->m_seed << std::endl;
     outFPSString << "Agent_";
     if(m_pSimulation->agents[m_pSimulation->selectedAgent].swarmB) 
     {

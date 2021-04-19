@@ -14,6 +14,7 @@ public:
 	int fps;
 	double mspf;
 	float speed;
+	__int64 m_seed;
 	std::vector<Agent> agents = {};
 	int worldWidth;
 	int worldHeight;
@@ -21,7 +22,7 @@ public:
 	int numAgentsA;
 	int numAgentsB;
 	unsigned int selectedAgent = 0;
-	Simulation(int numAgents, int width, int height, int seed=RANDOM);
+	Simulation(int numAgents, int width, int height, __int64 seed=RANDOM);
 	void update();
 
 	void calculateFrameStatistics();
